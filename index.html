@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <style type="text/css">
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #menudiv h3 {
+        padding: 10px 11px;
+        font-size: 11px;
+        color: #000;
+        background-color: #FFF;
+        border-radius: 2px;
+        font-family: Roboto, Arial, sans-serif; 
+        cursor: pointer;
+      }
+
+      #menudiv h3:hover {
+        background-color: #F0F0F0;
+      }
+    </style>
+    <link href="map.css" rel="stylesheet">   
+    <link href="jquery-ui.css" rel="stylesheet">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <script src="MWRTAMapInfo.js"></script>
+    <script src="mapshared.js"></script>
+  </head>
+  <body>
+    <div class="menuitem" id="menudiv" style="width: 140px; z-index: 2; position:absolute;top: 10px; display: inline-block;right: 10px; background-color:white; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;">
+      <h3 onClick="toggleMenu();">Route Select</h3>
+      <div id="menuItems" style="display:none;">
+        <form>
+          <br>
+          <input type="checkbox" id="Route1CB" name="routeselectorcb" value="RT01" checked="checked"> Route 1 <br>
+          <input type="checkbox" id="Route2CB" name="routeselectorcb" value="RT02" checked="checked"> Route 2 <br>
+          <input type="checkbox" id="Route3CB" name="routeselectorcb" value="RT03" checked="checked"> Route 3 <br>
+          <input type="checkbox" id="Route4SCB" name="routeselectorcb" value="RT04S" checked="checked"> Route 4 South <br>
+          <input type="checkbox" id="Route4NCB" name="routeselectorcb" value="RT04N" checked="checked"> Route 4 North <br>
+          <input type="checkbox" id="Route5CB" name="routeselectorcb" value="RT05" checked="checked"> Route 5 <br>
+          <input type="checkbox" id="Route6CB" name="routeselectorcb" value="RT06" checked="checked"> Route 6 <br>
+          <input type="checkbox" id="Route7CB" name="routeselectorcb" value="RT07" checked="checked"> Route 7 <br>
+          <input type="checkbox" id="Route7CCB" name="routeselectorcb" value="RT07C" checked="checked"> Route 7C <br>
+          <input type="checkbox" id="Route8CB" name="routeselectorcb" value="RT08" checked="checked"> Route 8 <br>
+          <input type="checkbox" id="Route9CB" name="routeselectorcb" value="RT09" checked="checked"> Route 9 <br>
+          <input type="checkbox" id="Route10CB" name="routeselectorcb" value="RT10" checked="checked"> Route 10 <br>
+          <input type="checkbox" id="Route11CB" name="routeselectorcb" value="RT11" checked="checked"> Route 11 <br>
+          <br>
+          <input type="checkbox" id="SelectAll" name="selectall" checked="checked"> Toggle All <br><br>
+          <button id="ClearStorage"> Clear Storage</button> <br><br>
+        </form>
+      </div>
+    </div>
+    <div id="map-canvas"></div>
+
+    <script type="text/javascript">
+        var n = 0;
+        var map;
+        var markers = [];
+        var lookup = {};
+        var infowindows = {};
+        var i = 0;
+        var polylines = [];
+        var polylinelookup = {};
+        var showroutes = false;
+        var trafficLayer;
+        //routefilter determines which routes to filter- if the route is in the lookup, do not display on map.
+        var routefilter = window.localStorage && JSON.parse(window.localStorage.getItem("routefilter")) || [];
+
+        var allChecked = true;
+        var routeCheckboxes = document.querySelectorAll("#menuItems input[name='routeselectorcb']");
+        for (var k = 0; k < routeCheckboxes.length; k++) {
+            allChecked = allChecked && (routefilter.indexOf(routeCheckboxes[k].value) < 0);
+            routeCheckboxes[k].checked = routefilter.indexOf(routeCheckboxes[k].value) < 0;
+        }
+
+        if (!allChecked) {
+            document.getElementById("SelectAll").checked = false;
+        }
+
+        function initialize() {
+            $(document).ready()
+            {
+                var mapOptions = {
+                    center: { lat: 42.27949518169163, lng: -71.374216883298 },
+                    zoom: 12
+                };
+
+                map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+
+                trafficLayer = new google.maps.TrafficLayer();
+                trafficLayer.setMap(map);
+                var refresh = setInterval(function () { moveMarker(); }, 5000);
+                $(":checkbox[name='routeselectorcb']").change(function () { checkboxChecked($(this)); });
+                $(":checkbox[name='selectall']").change(function () { toggleAll($(this)); });
+                $("#ClearStorage").click(function () { window.localStorage.setItem("routefilter", "[]") });
+
+                var myloc = new google.maps.Marker({
+    clickable: false,
+    icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png', //http://i.stack.imgur.com/orZ4x.png
+                                                    new google.maps.Size(22,22),
+                                                    new google.maps.Point(0,18),
+                                                    new google.maps.Point(11,11)),
+    shadow: null,
+    zIndex: 999,
+    map: map
+});
+
+if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+    var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    myloc.setPosition(me);
+
+    navigator.geolocation.watchPosition(function(pos) {
+      var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      myloc.setPosition(me);
+    }, 
+    function() {}, {enableHighAccuracy: false, timeout: 2000});
+}, function(error) {
+    // ...
+});
+
+
+                setupIconArray();
+                //run once now
+                moveMarker();
+            }
+
+            applyFilter();
+        }
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBVImb4yfgpPtG2SvErICSeGHvG41ZZ58&callback=initialize&sensor=true"></script> 
+    <script type="text/javascript" src="markerwithlabel.js"></script>
+</body></html>

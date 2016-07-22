@@ -1,0 +1,87 @@
+﻿body {
+}
+
+
+.businfo {
+    width:200px;
+    height:200px;
+}
+
+.mapIconLabel {
+    font-size: 15px;
+    color: black;
+    font-family:  Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    background-color: white;
+    font-size: small;
+    font-weight: 800;
+}
+
+.menuitem {
+    font-family: Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    font-size: medium;
+    padding: 0px 10px;
+    border-radius: 5px;
+
+}
+
+h3 {
+    padding: 5px;
+    background-color: rgb(14, 84, 42);
+    color: rgb(255, 255, 255);
+    margin: 0px -10px;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 3px solid rgb(30, 178, 89);
+}
+
+.navheader { 
+  font-size: 12px;
+}
+
+.slide-trigger {
+  display: block;
+  border: 1px solid #CCCCCC;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.slide-trigger span {
+  background-image: url("/a/i/dropdown-arrows.png");
+  background-position: 0 -14px;
+  display: block;
+  float: right;
+  margin-top: 3px;
+  height: 14px;
+  width: 32px;
+}
+
+
+.navigation {
+  max-width: none;
+  background: #7db24e;
+  padding: 0;
+  margin: 0 15px;
+  display: none; 
+}
+
+.navigation li {
+    float: none; 
+    font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif
+}
+
+.navigation li a {
+  display: block;
+  color: #fff;
+  padding: 2.5px;
+  border-bottom: 1px solid #fff;
+}
+.navigation li a:hover { background: #0fcaf2; }
+
+.mobilerouteselector.disabled {
+    background: Gray;
+}
+
+
