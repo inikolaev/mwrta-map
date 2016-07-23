@@ -61,7 +61,7 @@ function identifyIcon(heading, route)
 }
 
 function moveMarker() {
-    var uri = 'http://vc.mwrta.com/api/FR/0';
+    var uri = '/mwrta';
     var vehadded = "";
 
     $.getJSON(uri)
