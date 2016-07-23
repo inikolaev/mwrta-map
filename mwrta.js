@@ -20,7 +20,7 @@ router.use(function(req, res, next) {
           data += chunk;
         });
         response.on('end', function () {
-          res.set({"Access-Control-Allow-Origin" : "*"});
+          res.set({"Access-Control-Allow-Origin" : "*", "Content-type: application/json; charset=utf-8"});
           res.send(data);
         });
       });
