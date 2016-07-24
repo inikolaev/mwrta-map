@@ -6,7 +6,7 @@ function ensureSecure(req, res, next) {
     return next();
   }
 
-  res.redirect('https://' + req.hostname + ':' + req.port + '/' + req.url);
+  res.redirect('https://' + req.hostname + req.url);
 };
 
 var server = express();
