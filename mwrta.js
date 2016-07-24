@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require("express");
 var router = express.Router();
+var moment = require('moment-timezone');
 
 if (!Array.add) {
   Array.add = function(c, e) {
@@ -21,7 +22,15 @@ router.use(function(req, res, next) {
         });
         response.on('end', function () {
           res.set({"Access-Control-Allow-Origin" : "*", "Content-type" : "application/json; charset=utf-8"});
-          res.send(data);
+          json = JSON.parse(data);
+
+          for (var i = 0; i < json.length; i++) {
+              var time = json[i].DateTime;
+              var timestamp = new Date(moment.tz(time, "America/New_York").format()).getTime();
+              json[i].DateTimestamp = timestamp;
+          }
+
+          res.send(JSON.stringify(json));
         });
       });
       request.on('error', function (e) {

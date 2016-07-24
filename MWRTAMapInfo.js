@@ -76,6 +76,7 @@ function moveMarker() {
             icon = new google.maps.MarkerImage('../Styles/images/busiconsm.png', new google.maps.Size(30, 30));
         }
             
+        var FIVE_MINUTES = 5 * 60 * 1000;
         var numberofmarkers = 0;
         var lastmarkerlocation;
         $.each(data, function (key, item) {
@@ -84,7 +85,8 @@ function moveMarker() {
                 if (routefilter.indexOf(item.Route) == -1) {
                     var itemdate = new Date(ConvertDate(item.DateTime));
                     date = new Date(itemdate.setMinutes(itemdate.getMinutes() + 5));
-                    if (new Date() < date)
+                    var timestamp = item.DateTimestamp + FIVE_MINUTES;
+                    if (new Date().getTime() < timestamp)
                     {
                         if (item.Route != null)
                         {
