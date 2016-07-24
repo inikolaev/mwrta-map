@@ -13,7 +13,7 @@ var server = express();
 server.set('port', (process.env.PORT || 5000));
 server.disable('x-powered-by');
 server.engine('.html', require('ejs').renderFile);
-server.all('*', ensureSecure);
+//server.all('*', ensureSecure);
 server.use('/mwrta', bodyParser.json({type: '*/*'}), require("./mwrta"));
 server.use('/', express.static('.'))
 
