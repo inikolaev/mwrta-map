@@ -1,4 +1,6 @@
 var iconarray;
+var isHighResolutionDisplay = window.devicePixelRatio && window.devicePixelRatio >= 2;
+var iconSize = isHighResolutionDisplay ? 25 : 50;
 
 function CreateInfoBoxContent(item) {
     var content = '<div class="businfo">' +
@@ -91,7 +93,7 @@ function moveMarker() {
                         if (item.Route != null)
                         {
                             var location = 'http://vc.mwrta.com/Styles/images/busicon/' + item.Route + '.png';
-                            var icon = new google.maps.MarkerImage(location, new google.maps.Size(50, 50));
+                            var icon = new google.maps.MarkerImage(location, new google.maps.Size(iconSize, iconSize));
                         }
 
                         var latlng = new google.maps.LatLng(item.Lat, item.Long);
