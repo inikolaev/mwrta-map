@@ -8,19 +8,17 @@
 }
 
 .mapIconLabel {
-    font-size: 15px;
     color: black;
-    font-family:  Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
+    font-family: Roboto, Arial, sans-serif;
     background-color: white;
-    font-size: small;
-    font-weight: 800;
+    font-size: 11px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    padding: 4px;
+    border-radius: 2px;
 }
 
 .menuitem {
-    font-family: Helvetica,Arial,"DejaVu Sans","Liberation Sans",Freesans,sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-size: medium;
     padding: 0px 10px;
     border-radius: 5px;
