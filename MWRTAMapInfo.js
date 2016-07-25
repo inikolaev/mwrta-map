@@ -83,17 +83,19 @@ function moveMarker() {
             if (item) {
                 //if the item is in the routefilter, do not display.
                 if (routefilter.indexOf(item.Route) == -1) {
-                    var itemdate = new Date(ConvertDate(item.DateTime));
-                    date = new Date(itemdate.setMinutes(itemdate.getMinutes() + 5));
+                    var currentTimestamp = new Date().getTime();
                     var timestamp = item.DateTimestamp + FIVE_MINUTES;
-                    if (new Date().getTime() < timestamp)
+
+                    if (currentTimestamp < timestamp)
                     {
                         if (item.Route != null)
                         {
                             var location = 'http://vc.mwrta.com/Styles/images/busicon/' + item.Route + '.png';
                             var icon = new google.maps.MarkerImage(location, new google.maps.Size(50, 50));
                         }
+
                         var latlng = new google.maps.LatLng(item.Lat, item.Long);
+
                         if (lookup.hasOwnProperty(item.VehiclePlate)) {
                             lookup[item.VehiclePlate].setPosition(latlng);
                             lookup[item.VehiclePlate].setIcon(identifyIcon(item.Heading, item.Route));
@@ -116,6 +118,7 @@ function moveMarker() {
                             });
                             marker1.setMap(map);
                             marker1.date = item.DateTime;
+                            marker1.timestamp = item.DateTimestamp;
                             marker1.VehiclePlate = item.VehiclePlate;
                             marker1.Route = item.Route;
                             vehadded = vehadded + " " + item.VehiclePlate;

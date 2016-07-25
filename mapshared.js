@@ -34,15 +34,14 @@ function removeMarker(vehnumber) {
     }
 }
 
-
+var THREE_MINUTES = 3 * 60 * 1000;
 
 function cleanMarkers() {
     //Anything older than three minutes should be removed from the map.
 
     for (index = 0; index < markers.length; index++) {
-        var indexdate = new Date(ConvertDate(markers[index].date));
-        indexdate.setMinutes(indexdate.getMinutes() + 3);
         var cleanupdate = new Date();
+        var indexdate = markers[index].timestamp + THREE_MINUTES;
 
         if (indexdate < cleanupdate) {
             removeMarker(markers[index].VehiclePlate);
