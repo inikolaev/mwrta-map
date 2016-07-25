@@ -46,7 +46,7 @@ function setupIconArray() {
         for (var j = 0; j < AvailableDirection.length; j++)
         {
             var iconname = AvailableRoutes[i] + AvailableDirection[j];
-            iconarray[iconname] = new google.maps.MarkerImage('../Styles/images/busicon/' + iconname + '.png', new google.maps.Size(50,50));
+            iconarray[iconname] = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busicon/' + iconname + '.png', new google.maps.Size(50,50));
 
         }
     }
@@ -69,11 +69,11 @@ function moveMarker() {
         var icon;
         if ($(window).width < 1200)
         {
-            icon = new google.maps.MarkerImage('../Styles/images/busicon7.png', new google.maps.Size(50, 50));
+            icon = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busicon7.png', new google.maps.Size(50, 50));
         }
         else
         {
-            icon = new google.maps.MarkerImage('../Styles/images/busiconsm.png', new google.maps.Size(30, 30));
+            icon = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busiconsm.png', new google.maps.Size(30, 30));
         }
             
         var FIVE_MINUTES = 5 * 60 * 1000;
@@ -90,7 +90,7 @@ function moveMarker() {
                     {
                         if (item.Route != null)
                         {
-                            var location = '../Styles/images/busicon/' + item.Route + '.png';
+                            var location = 'http://vc.mwrta.com/Styles/images/busicon/' + item.Route + '.png';
                             var icon = new google.maps.MarkerImage(location, new google.maps.Size(50, 50));
                         }
                         var latlng = new google.maps.LatLng(item.Lat, item.Long);
