@@ -53,7 +53,7 @@ function setupIconArray() {
                 'http://vc.mwrta.com/Styles/images/busicon/' + iconname + '.png', 
                 new google.maps.Size(iconSize, iconSize),
                 new google.maps.Point(0, 0),
-                new google.maps.Point(iconSize, iconSize),
+                new google.maps.Point(scaledIconSize, scaledIconSize),
                 new google.maps.Size(scaledIconSize, scaledIconSize));
         }
     }
@@ -80,7 +80,7 @@ function moveMarker() {
                 'http://vc.mwrta.com/Styles/images/busicon7.png', 
                 new google.maps.Size(iconSize, iconSize),
                 new google.maps.Point(0, 0),
-                new google.maps.Point(iconSize, iconSize),
+                new google.maps.Point(scaledIconSize, scaledIconSize),
                 new google.maps.Size(scaledIconSize, scaledIconSize));
         }
         else
@@ -109,7 +109,7 @@ function moveMarker() {
                                 location, 
                                 new google.maps.Size(iconSize, iconSize),
                                 new google.maps.Point(0, 0),
-                                new google.maps.Point(iconSize, iconSize),
+                                new google.maps.Point(scaledIconSize, scaledIconSize),
                                 new google.maps.Size(scaledIconSize, scaledIconSize)
                             );
                         }
