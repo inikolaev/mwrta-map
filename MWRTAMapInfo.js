@@ -53,7 +53,7 @@ function setupIconArray() {
                 'http://vc.mwrta.com/Styles/images/busicon/' + iconname + '.png', 
                 new google.maps.Size(iconSize, iconSize),
                 new google.maps.Point(0, 0),
-                new google.maps.Point(scaledIconSize, scaledIconSize),
+                new google.maps.Point(scaledIconSize / 2, scaledIconSize),
                 new google.maps.Size(scaledIconSize, scaledIconSize));
         }
     }
@@ -80,7 +80,7 @@ function moveMarker() {
                 'http://vc.mwrta.com/Styles/images/busicon7.png', 
                 new google.maps.Size(iconSize, iconSize),
                 new google.maps.Point(0, 0),
-                new google.maps.Point(scaledIconSize, scaledIconSize),
+                new google.maps.Point(scaledIconSize / 2, scaledIconSize),
                 new google.maps.Size(scaledIconSize, scaledIconSize));
         }
         else
@@ -109,7 +109,7 @@ function moveMarker() {
                                 location, 
                                 new google.maps.Size(iconSize, iconSize),
                                 new google.maps.Point(0, 0),
-                                new google.maps.Point(scaledIconSize, scaledIconSize),
+                                new google.maps.Point(scaledIconSize / 2, scaledIconSize),
                                 new google.maps.Size(scaledIconSize, scaledIconSize)
                             );
                         }
@@ -124,14 +124,12 @@ function moveMarker() {
                         }
                         else {
                             var routenumber = item.Route;
-                            //create a new marker and add to arrays.
-                            //var marker1 = new google.maps.Marker({
                             var marker1 = new MarkerWithLabel({
                                 map: map,
                                 dragabble: false,
                                 position: latlng,
-                                labelContent: "Veh: " + item.VehiclePlate +  routenumber.replace("RT"," Route "),
-                                labelAnchor: new google.maps.Point(-3, -5),
+                                labelContent: "<span>Veh: " + item.VehiclePlate +  routenumber.replace("RT"," Route ") + "</span>",
+                                labelAnchor: new google.maps.Point(0, -2),
                                 labelClass: "mapIconLabel",
                                 labelInBackground: false,
                                 icon: icon
@@ -150,7 +148,6 @@ function moveMarker() {
                     else if (lookup.hasOwnProperty(item.VehiclePlate)) {
                         removeMarker(item.VehiclePlate);
                     }
-
                 }
                 else {
                     //

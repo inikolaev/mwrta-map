@@ -8,6 +8,14 @@
 }
 
 .mapIconLabel {
+    white-space: nowrap;
+    pointer-events: none;
+    overflow: visible !important;
+}
+
+.mapIconLabel span {
+    position: relative;
+    left: -50%;
     color: black;
     font-family: Roboto, Arial, sans-serif;
     background-color: white;
