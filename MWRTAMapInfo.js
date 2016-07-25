@@ -1,6 +1,7 @@
 var iconarray;
 var isHighResolutionDisplay = window.devicePixelRatio && window.devicePixelRatio >= 2;
 var iconSize = 50;
+var scaledIconSize = isHighResolutionDisplay ? iconSize / 2 : iconSize;
 
 function CreateInfoBoxContent(item) {
     var content = '<div class="businfo">' +
@@ -48,8 +49,12 @@ function setupIconArray() {
         for (var j = 0; j < AvailableDirection.length; j++)
         {
             var iconname = AvailableRoutes[i] + AvailableDirection[j];
-            iconarray[iconname] = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busicon/' + iconname + '.png', new google.maps.Size(50,50));
-
+            iconarray[iconname] = new google.maps.MarkerImage(
+                'http://vc.mwrta.com/Styles/images/busicon/' + iconname + '.png', 
+                new google.maps.Size(iconSize, iconSize),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(iconSize, iconSize),
+                new google.maps.Size(scaledIconSize, scaledIconSize));
         }
     }
 
@@ -71,11 +76,18 @@ function moveMarker() {
         var icon;
         if ($(window).width < 1200)
         {
-            icon = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busicon7.png', new google.maps.Size(50, 50));
+            icon = new google.maps.MarkerImage(
+                'http://vc.mwrta.com/Styles/images/busicon7.png', 
+                new google.maps.Size(iconSize, iconSize),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(iconSize, iconSize),
+                new google.maps.Size(scaledIconSize, scaledIconSize));
         }
         else
         {
-            icon = new google.maps.MarkerImage('http://vc.mwrta.com/Styles/images/busiconsm.png', new google.maps.Size(30, 30));
+            icon = new google.maps.MarkerImage(
+                'http://vc.mwrta.com/Styles/images/busiconsm.png', 
+                new google.maps.Size(30, 30));
         }
             
         var FIVE_MINUTES = 5 * 60 * 1000;
@@ -97,8 +109,8 @@ function moveMarker() {
                                 location, 
                                 new google.maps.Size(iconSize, iconSize),
                                 new google.maps.Point(0, 0),
-                                new google.maps.Point(0, 0),
-                                new google.maps.Size(iconSize / 2, iconSize / 2)
+                                new google.maps.Point(iconSize, iconSize),
+                                new google.maps.Size(scaledIconSize, scaledIconSize)
                             );
                         }
 
