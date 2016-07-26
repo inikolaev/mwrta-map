@@ -1,0 +1,6 @@
+{
+  "short_name": "MWRTA Bus Map",
+  "name": "MWRTA Real-Time bus map",
+  "display": "standalone",
+  "orientation": "portrait"
+}
