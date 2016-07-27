@@ -15,6 +15,11 @@
         padding: 0;
       }
 
+      #menudiv {
+        max-height: 95%;
+        overflow-y: scroll;
+      }
+
       #menudiv h3 {
         padding: 10px 11px;
         font-size: 11px;
@@ -28,6 +33,20 @@
       #menudiv h3:hover {
         background-color: #F0F0F0;
       }
+
+      #menudiv ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 8px 0;
+      }
+
+      #menudiv ul li.toggle-all {
+        padding: 8px 0;
+      }
+
+      #menudiv ul li.clear-storage {
+        padding: 5px 0;
+      }
     </style>
     <link href="map.css" rel="stylesheet">   
     <link href="jquery-ui.css" rel="stylesheet">
@@ -37,27 +56,57 @@
     <script src="mapshared.js"></script>
   </head>
   <body>
-    <div class="menuitem" id="menudiv" style="width: 140px; z-index: 2; position:absolute;top: 10px; display: inline-block;right: 10px; background-color:white; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;">
+    <div class="menuitem" id="menudiv" style="width: 150px; z-index: 2; position:absolute;top: 10px; display: inline-block;right: 10px; background-color:white; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;">
       <h3 onClick="toggleMenu();">Route Select</h3>
       <div id="menuItems" style="display:none;">
         <form>
-          <br>
-          <input type="checkbox" id="Route1CB" name="routeselectorcb" value="RT01" checked="checked"> Route 1 <br>
-          <input type="checkbox" id="Route2CB" name="routeselectorcb" value="RT02" checked="checked"> Route 2 <br>
-          <input type="checkbox" id="Route3CB" name="routeselectorcb" value="RT03" checked="checked"> Route 3 <br>
-          <input type="checkbox" id="Route4SCB" name="routeselectorcb" value="RT04S" checked="checked"> Route 4 South <br>
-          <input type="checkbox" id="Route4NCB" name="routeselectorcb" value="RT04N" checked="checked"> Route 4 North <br>
-          <input type="checkbox" id="Route5CB" name="routeselectorcb" value="RT05" checked="checked"> Route 5 <br>
-          <input type="checkbox" id="Route6CB" name="routeselectorcb" value="RT06" checked="checked"> Route 6 <br>
-          <input type="checkbox" id="Route7CB" name="routeselectorcb" value="RT07" checked="checked"> Route 7 <br>
-          <input type="checkbox" id="Route7CCB" name="routeselectorcb" value="RT07C" checked="checked"> Route 7C <br>
-          <input type="checkbox" id="Route8CB" name="routeselectorcb" value="RT08" checked="checked"> Route 8 <br>
-          <input type="checkbox" id="Route9CB" name="routeselectorcb" value="RT09" checked="checked"> Route 9 <br>
-          <input type="checkbox" id="Route10CB" name="routeselectorcb" value="RT10" checked="checked"> Route 10 <br>
-          <input type="checkbox" id="Route11CB" name="routeselectorcb" value="RT11" checked="checked"> Route 11 <br>
-          <br>
-          <input type="checkbox" id="SelectAll" name="selectall" checked="checked"> Toggle All <br><br>
-          <button id="ClearStorage"> Clear Storage</button> <br><br>
+          <ul>
+            <li>
+              <input type="checkbox" id="Route1CB" name="routeselectorcb" value="RT01" checked="checked"> Route 1
+            </li>
+            <li>
+              <input type="checkbox" id="Route2CB" name="routeselectorcb" value="RT02" checked="checked"> Route 2
+            </li>
+            <li>
+              <input type="checkbox" id="Route3CB" name="routeselectorcb" value="RT03" checked="checked"> Route 3
+            </li>
+            <li>
+              <input type="checkbox" id="Route4SCB" name="routeselectorcb" value="RT04S" checked="checked"> Route 4 South
+            </li>
+            <li>
+              <input type="checkbox" id="Route4NCB" name="routeselectorcb" value="RT04N" checked="checked"> Route 4 North
+            </li>
+            <li>
+              <input type="checkbox" id="Route5CB" name="routeselectorcb" value="RT05" checked="checked"> Route 5
+            </li>
+            <li>
+              <input type="checkbox" id="Route6CB" name="routeselectorcb" value="RT06" checked="checked"> Route 6
+            </li>
+            <li>
+              <input type="checkbox" id="Route7CB" name="routeselectorcb" value="RT07" checked="checked"> Route 7
+            </li>
+            <li>
+              <input type="checkbox" id="Route7CCB" name="routeselectorcb" value="RT07C" checked="checked"> Route 7C
+            </li>
+            <li>
+              <input type="checkbox" id="Route8CB" name="routeselectorcb" value="RT08" checked="checked"> Route 8
+            </li>
+            <li>
+              <input type="checkbox" id="Route9CB" name="routeselectorcb" value="RT09" checked="checked"> Route 9
+            </li>
+            <li>
+              <input type="checkbox" id="Route10CB" name="routeselectorcb" value="RT10" checked="checked"> Route 10
+            </li>
+            <li>
+              <input type="checkbox" id="Route11CB" name="routeselectorcb" value="RT11" checked="checked"> Route 11
+            </li>
+            <li class="toggle-all">
+              <input type="checkbox" id="SelectAll" name="selectall" checked="checked"> Toggle All
+            </li>
+            <li class="clear-storage">
+              <button id="ClearStorage">Clear Storage</button>
+            </li>
+          </ul>
         </form>
       </div>
     </div>
